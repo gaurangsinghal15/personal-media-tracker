@@ -42,7 +42,9 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-900 text-white p-6">
       <header className="max-w-5xl mx-auto flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-500">MediaTracker</h1>
+        <Link href="/" className="text-3xl font-bold text-blue-500">
+          MediaTracker
+        </Link>
         <Link
           href="/login"
           className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded font-medium transition"
@@ -74,16 +76,16 @@ export default function Home() {
           {results.map((item) => (
             <div
               key={item.id}
-              className="bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-700 flex flex-col"
+              className="bg-slate-800 rounded-lg overflow-hidden shadow-lg border border-slate-700 flex flex-col hover:border-blue-500 transition cursor-pointer"
             >
               {item.poster_path ? (
                 <img
                   src={`https://image.tmdb.org/t500${item.poster_path}`}
                   alt={item.title || item.name}
-                  className="w-full h-72 object-cover"
+                  className="w-full h-80 object-cover"
                 />
               ) : (
-                <div className="w-full h-72 bg-slate-700 flex items-center justify-center text-slate-400">
+                <div className="w-full h-80 bg-slate-700 flex items-center justify-center text-slate-400">
                   No Image
                 </div>
               )}
@@ -100,6 +102,9 @@ export default function Home() {
                   <span className="text-sm font-semibold text-yellow-400">
                     ★ {item.vote_average?.toFixed(1)}
                   </span>
+                  <button className="text-xs bg-blue-600 px-2.5 py-1 rounded hover:bg-blue-700 transition">
+                    + Add to List
+                  </button>
                 </div>
               </div>
             </div>

@@ -1,16 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  const [message, setMessage] = useState('');
+  const router = useRouter();
 
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage(isSignUp ? 'Account created! (Demo)' : 'Logged in! (Demo)');
+    // Redirects user back to homepage after login/signup submit
+    router.push('/');
   };
 
   return (
@@ -50,12 +52,6 @@ export default function LoginPage() {
             {isSignUp ? 'Sign Up' : 'Log In'}
           </button>
         </form>
-
-        {message && (
-          <p className="mt-4 text-sm text-center text-blue-400 bg-slate-700 p-2 rounded">
-            {message}
-          </p>
-        )}
 
         <div className="mt-6 text-center text-sm text-slate-400">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
