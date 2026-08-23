@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/lib/supabaseClient';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -9,19 +8,9 @@ export default function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const [message, setMessage] = useState('');
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
-    setMessage('');
-
-    if (isSignUp) {
-      const { error } = await supabase.auth.signUp({ email, password });
-      if (error) setMessage(error.message);
-      else setMessage('Check your email for the confirmation link!');
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setMessage(error.message);
-      else setMessage('Successfully logged in!');
-    }
+    setMessage(isSignUp ? 'Account created! (Demo)' : 'Logged in! (Demo)');
   };
 
   return (
@@ -71,6 +60,7 @@ export default function LoginPage() {
         <div className="mt-6 text-center text-sm text-slate-400">
           {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
           <button
+            type="button"
             onClick={() => setIsSignUp(!isSignUp)}
             className="text-blue-400 hover:underline font-medium ml-1"
           >
